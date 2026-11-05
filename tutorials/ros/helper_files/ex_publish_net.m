@@ -10,7 +10,7 @@
 %% Node Creation
 % Create one local node
 masterHost = 'localhost';
-node_1 = ros.Node('node_1', masterHost);
+node_twist_scan = ros.Node('node_twist_scan', masterHost);
 
 %% Scan and TF Topics
 
@@ -21,7 +21,10 @@ messageData = load('specialROSMessageData.mat','scan','tf');
 %% Pose Topic
 % Create a publisher for the '/pose' topic
 twistPub = rospublisher('/twist','geometry_msgs/Twist','DataFormat','struct');
+%twistPub = ros.Publisher(node_twist_scan,"/twist",'geometry_msgs/Twist','DataFormat','struct')
+
 scanPub = rospublisher('/scan','sensor_msgs/LaserScan','DataFormat','struct');
+%scanPub = ros.Publisher(node_twist_scan,"/scan",'sensor_msgs/LaserScan','DataFormat','struct')
 
 % Initialize a message of the type associated with the topic
 twistPubmsg = rosmessage(twistPub);
