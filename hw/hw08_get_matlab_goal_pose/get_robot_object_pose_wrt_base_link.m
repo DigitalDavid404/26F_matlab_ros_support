@@ -66,6 +66,7 @@ function [mat_R_T_G, mat_R_T_M] = get_robot_object_pose_wrt_base_link(model_name
     end
 
     % Get end-effector pose wrt to base via getTransform(tftree,targetframe,sourceframe), where sourceframe is the reference frame 
+    tftree = optns{'tftree'};
     try waitForTransform(tftree,'base_link','tool0',5);  %NOTE: 🟦🟦🟦Similar code to get_gripper pose 
         current_pose = getTransform(tftree,base,end_effector,rostime('now'),'Timeout', r.tf_listening_time);
     catch

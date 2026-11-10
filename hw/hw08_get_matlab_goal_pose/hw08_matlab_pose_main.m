@@ -20,8 +20,9 @@ r = rosClassHandle_UR5e;
 %% Options 
 
 % Create global dictionary. Passed to all functions. Includes robot handle
-keys   = ["debug", "toolFlag", "z_offset", "frameAdjustmentFlag", "toolAdjustmentFlag", "toolAdjustment", "rHandle"];
-values = {      0,          0, 0.09,       1,                      1,                   0.165,         r};
+tftree = rostf;
+keys   = ["debug", "toolFlag", "z_offset", "frameAdjustmentFlag", "toolAdjustmentFlag", "toolAdjustment", "rHandle", "tftree"];
+values = {      0,          0, 0.09,       1,                      1,                   0.165,         r,         tftree};
 
 % Instantiate the dictionary: values can be access via {}, i.e. optns{'key'}
 disp("Creating dictionary...");
