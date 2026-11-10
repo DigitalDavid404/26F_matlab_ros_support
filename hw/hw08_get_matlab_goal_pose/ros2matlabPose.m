@@ -53,15 +53,25 @@ function matlab_pose = ros2matlabPose(p,frameAdjustmentFlag,toolAdjustmentFlag,o
 
         % gazebo_msgs/GetModelStateResponse
         if strcmp(p.MessageType, 'gazebo_msgs/GetModelStateResponse')
-            pos = % **Complete Code**
+            pos = [p.Pose.Position.X, ...
+                p.Pose.Position.Y,...
+                p.Pose.Position.Z];
     
-            q = % **Complete Code**
+            q = [p.Pose.Orientation.W,...
+                p.Pose.Orientation.X, ...
+                p.Pose.Orientation.Y,...
+                p.Pose.Orientation.Z];
 
         % 'geometry_msgs/TransformStamped'
         elseif strcmp(p.MessageType, 'geometry_msgs/TransformStamped')
-            % **Complete Code**
-    
-            % **Complete Code**
+         pos = [p.Transform.Translation.X, ...
+               p.Transform.Translation.Y, ...
+               p.Transform.Translation.Z];
+
+        q = [p.Transform.Rotation.W, ...
+             p.Transform.Rotation.X, ...
+             p.Transform.Rotation.Y, ...
+             p.Transform.Rotation.Z];
         end
     
     % Adjustment
@@ -70,7 +80,9 @@ function matlab_pose = ros2matlabPose(p,frameAdjustmentFlag,toolAdjustmentFlag,o
     else
         % 
         if strcmp(p.MessageType, 'gazebo_msgs/GetModelStateResponse')
-            pos = % **Complete Code**
+            pos = [-p.Pose.Position.Y, ...
+                    p.Pose.Position.X, ...
+                   (p.Pose.Position.Z + endEffectorAdjustment)];
     
             q = UnitQuaternion(p.Pose.Orientation.W, ...
                                [-p.Pose.Orientation.Y, ...
@@ -78,12 +90,17 @@ function matlab_pose = ros2matlabPose(p,frameAdjustmentFlag,toolAdjustmentFlag,o
                                 (p.Pose.Orientation.Z)]);
         % 'geometry_msgs/TransformStamped'
         elseif strcmp(p.MessageType, 'geometry_msgs/TransformStamped')
-            pos = % **Complete Code**
+            pos = [-p.Transform.Translation.Y, ...
+                    p.Transform.Translation.X, ...
+                    p.Transform.Translation.Z];
     
-            q = % **Complete Code**
+            q = UnitQuaternion(p.Transform.Rotation.W, ...
+                               [-p.Transform.Rotation.Y, ...
+                                p.Transform.Rotation.X, ...
+                               (p.Transform.Rotation.Z)] );
         end
     end
 
     % Build matlab pose
-    matlab_pose = % **Complete Code**
-end
+    matlab_pose = transl(pos) * q.T;
+    end

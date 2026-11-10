@@ -44,7 +44,7 @@ function [mat_R_T_G, mat_R_T_M] = get_robot_object_pose_wrt_base_link(model_name
     mat_W_T_M = ros2matlabPose(W_T_M, frameAdjustmentFlag, toolAdjustmentFlag, optns); % Frame at junction with table
     
     % Change reference frame from world to robot's base_link
-    mat_R_T_M = inv(mat_W_T_R)*mat_W_T_M;   %NOTE: Remember poses and the way the sub/super scripts need to connect
+    mat_R_T_M = inv(mat_W_T_R)*mat_W_T_M;   %NOTE:🟦🟦🟦 Remember poses and the way the sub/super scripts need to connect
 
     %z_offset = 0.052; %0.052; % Can height is 5.2cm
     mat_R_T_M(3,4) = mat_R_T_M(3,4) + z_offset; % Offset along +z_base_link to simulate knowing height of top of can.
@@ -66,12 +66,12 @@ function [mat_R_T_G, mat_R_T_M] = get_robot_object_pose_wrt_base_link(model_name
     end
 
     % Get end-effector pose wrt to base via getTransform(tftree,targetframe,sourceframe), where sourceframe is the reference frame 
-    try
-        current_pose = % **Complete Code**
+    try waitForTransform(tftree,'base_link','tool0',5);  %NOTE: 🟦🟦🟦Similar code to get_gripper pose 
+        current_pose = getTransform(tftree,base,end_effector,rostime('now'),'Timeout', r.tf_listening_time);
     catch
         % Try again
-        current_pose = % **Complete Code**
-    end
+        current_pose = getTransform(tftree,base,end_effector,rostime('now'),'Timeout', r.tf_listening_time);
+    end  
 
     % Convert gripper pose to matlab format
     mat_R_T_G = ros2matlabPose(current_pose,frameAdjustmentFlag,toolAdjustmentFlag,optns);    
