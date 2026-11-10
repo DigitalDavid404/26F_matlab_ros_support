@@ -7,9 +7,9 @@ rosshutdown;
 pause(2);       
 
 %% Set IP address for master and node:
-masterHostIP = % **Complete Code** 
-nodeHostIP = % **Complete Code** 
-rosinit(masterHostIP, 11311, "NodeHost",nodeHostIP);
+masterHostIP = '192.168.1.81';   %NOTES: These Ip's for home
+nodeHostIP   = '192.168.1.65';   
+rosinit(masterHostIP, 11311, "NodeHost", nodeHostIP);
 
 %% ROS Class handle
 
@@ -48,6 +48,7 @@ greenBin = [-0.4, -0.45, 0.25, -pi/2, -pi 0];
 
 %% 03 Get Poses in Matlab format: (i) robot_base-to-model   (mat_R_T_M)
 %%                                (ii)robot_base-to-gripper (mat_R_T_G)
+
 
 % Get Model Names
 model_name = models.ModelNames{23+n};
