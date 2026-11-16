@@ -23,7 +23,8 @@ function traj_goal = convert2ROSPointVec(mat_joint_traj, robot_joint_names, traj
     timeStep = traj_duration / traj_steps;
     
     % TODO: Set joint names. Note: must remove finger at index 2
-    traj_goal.Trajectory.JointNames = %Complete code here%
+    robot_joint_names(2) = []; %NOTE: 🟦🟦🟦 this removes it 
+    traj_goal.Trajectory.JointNames = robot_joint_names; %🟦🟦🟦
     
   
     %% Set Points
@@ -32,14 +33,25 @@ function traj_goal = convert2ROSPointVec(mat_joint_traj, robot_joint_names, traj
     points = cell(1,traj_steps);
 
     % TODO: Create Point Message
-    %Complete code here%
+    for i = 1:traj_steps    %🟦🟦🟦this makes it so if we have more than 1 point later it still works
+        points{i} = rosmessage('trajectory_msgs/JointTrajectoryPoint','DataFormat','struct');
+
 
     % TODO: Fill r.point: extract each waypoint and set it as a 6x1 (use transpose)
     %Complete code here%
+    r.point.Positions = transpose(mat2rosJoints(mat_joint_traj(i,:)));
+    r.point.Velocities = zeros(6,1);
+    r.point.Accelerations = zeros(6,1);
+    r.point.TimeFromStart   = rosduration(i*timeStep,'DataFormat','struct');
 
-    % TODO: Set inside points cell
+
+        % TODO: Set inside points cell
+        points{i} = r.point;
+    end
+
     %Complete code here%
 
     % TODO: Copy points to traj_goal.Trajectory.Points
     %Complete code here%
+    traj_goal.Trajectory.Points = [points{:}];
 end

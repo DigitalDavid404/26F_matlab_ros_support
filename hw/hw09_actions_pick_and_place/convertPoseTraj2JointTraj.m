@@ -49,7 +49,8 @@ function [mat_joint_traj,robot_joint_names] = convertPoseTraj2JointTraj(mat_traj
     % TODO: 5. Go through trajectory loop
     % Check for time complexity. Can we improve efficiency.
     for i = 1:num_traj_points
-        [des_q, ~] = %Complete code here%
+        pose = mat_traj(:,:,i);
+        [des_q, ~] = r.ik('tool0', pose, [1 1 1 1 1 1], mat_cur_q);
         
         % Check Joint Angle Integrity
         if max( abs(des_q) ) > 2*pi 

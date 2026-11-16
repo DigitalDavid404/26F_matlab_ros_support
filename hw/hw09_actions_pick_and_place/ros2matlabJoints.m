@@ -17,17 +17,17 @@ function [mat_cur_q,robot_joint_names] = ros2matlabJoints(ros_cur_jnt_state_msg)
     mat_cur_q = zeros(1,6);     % array of joint angles
     
     %% Extract the latest current joint angle values and joint names
-     ros_cur_q =  % Complete code here%
-     robot_joint_names =  % Complete code here%
+     ros_cur_q =  ros_cur_jnt_state_msg.Position; %🟦🟦🟦 my code watch out
+     robot_joint_names =  ros_cur_jnt_state_msg.Name;
     
      %% Create a UR5e Dictionary where keys are joint naves and values is the index order
-     ur5e = dictionary(robot_joint_names{1}, % Complete code here%,... % elbow
-                       robot_joint_names{2}, % Complete code here%,... % knuckle
-                       robot_joint_names{3}, % Complete code here%,... % lift
-                       robot_joint_names{4}, % Complete code here%,... % pan
-                       robot_joint_names{5}, % Complete code here%,... % w1
-                       robot_joint_names{6}, % Complete code here%,... % w2 
-                       robot_joint_names{7}, % Complete code here%);   % w3
+     ur5e = dictionary(robot_joint_names{1}, 3, ...   % elbow
+         robot_joint_names{2}, 7, ...   % knuckle
+         robot_joint_names{3}, 2, ...   % lift
+         robot_joint_names{4}, 1, ...   % pan
+         robot_joint_names{5}, 4, ...   % w1
+         robot_joint_names{6}, 5, ...   % w2
+         robot_joint_names{7}, 6);      % w3
     
     %% Fill joint angles correctly"
     for i = 1:ur5e.numEntries

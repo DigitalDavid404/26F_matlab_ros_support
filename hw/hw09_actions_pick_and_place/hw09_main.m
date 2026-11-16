@@ -5,10 +5,10 @@ clc
 clear
 rosshutdown;
 
-pause(2);       % Check if more down time helps diminish connection errors
-masterhostIP = "10.52.53.249";
-nodeHostIP = "10.52.54.181";
-rosinit(masterhostIP, 11311, "NodeHost",nodeHostIP);
+pause(2);       
+masterhostIP = "192.168.1.81";   
+nodeHostIP = "192.168.1.65";     
+rosinit(masterhostIP, 11311, "NodeHost", nodeHostIP)
 
 % if exist('r','var') && isvalid(r)
 %     disp('Robot handle exists and is valid.')
@@ -18,7 +18,7 @@ rosinit(masterhostIP, 11311, "NodeHost",nodeHostIP);
 r = rosClassHandle_UR5e;
 
 keys   = ["debug", "toolFlag", "traj_steps", "x_offset", "y_offset", "z_offset", "traj_duration", "frameAdjustmentFlag", "toolAdjustmentFlag", "toolAdjustment", "rHandle"];
-values = {      0,          0,            1,          0,          0,        0.2,               2,                     1,                    1,            0.165,         r};
+values = {      0,          0,            1,          0,          0,        0.09,            2,                     1,                    1,            0.165,         r};
 optns = dictionary(keys,values);
 
 %% 02 Go Home
@@ -44,8 +44,9 @@ for i=1:mod_sz
     %% 04 Pick Model
     % Assign strategy: topdown, direct
     strategy = 'topdown';
-    ret = pick(strategy, mat_R_T_M, optns,nm); % Can have optional starting opse for ctraj like: ret = pick(strategy, mat_R_T_M,mat_R_T_G);
-    
+    ret = pick(strategy, mat_R_T_M, optns); % Can have optional starting opse for ctraj like: ret = pick(strategy, mat_R_T_M,mat_R_T_G);
+    %🟦🟦🟦removed a ,nm at the end of above line
+
     %% 05 Place
     if ~ret
         disp('Attempting place...')

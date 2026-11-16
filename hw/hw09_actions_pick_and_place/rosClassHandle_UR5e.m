@@ -39,6 +39,9 @@ classdef rosClassHandle_UR5e
         % Yolo NN
         general_detector;
 
+        % Debug🟦🟦🟦 adding this because otherwise it breaks
+        debug; 
+
     end
 
     methods 
@@ -85,7 +88,7 @@ classdef rosClassHandle_UR5e
             r.pt_cloud_sub            = rossubscriber('/camera/depth/points','DataFormat','struct');
             
             % Yolo Neural Network
-            r.general_detector        = load("./vision_tutorials/detectors/detector_gral_sim.mat");   
+            r.general_detector        = load("C:\Users\dculp\OneDrive\Documents\GitHub\26F_matlab_ros_support\hw\hw09_actions_pick_and_place\yolo_export\detectors\detector_gral_sim.mat");   
         end
 
     end
