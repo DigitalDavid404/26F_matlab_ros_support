@@ -1,0 +1,5 @@
+# Block large files from being uploaded 
+/tutorials/vision/imgs_yolo_pose.zip
+/tutorials/vision/detectors/detector_can_sim.mat
+/tutorials/vision/detectors/detector_gral_sim.mat
+/tutorials/vision/detectors/detector_pouch_sim.mat
