@@ -92,7 +92,8 @@ function [ptCloud_pic, nonPlane_pic, ptCloud_world, base_to_cam_pose, cam_to_bas
             displaceG = displace_gripper(mat_R_T_G,optns,locations{iter},0.07);
         
         % These motions rotate the gripper inwards at end of displacement
-        % to center object.         elseif iter > 5
+        % to center object.         
+        elseif iter > 5
              displaceGA = displace_gripper(mat_R_T_G,optns,locations{iter},0.07,1,0.05);
         end
 
