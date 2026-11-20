@@ -3,3 +3,6 @@
 /tutorials/vision/detectors/detector_can_sim.mat
 /tutorials/vision/detectors/detector_gral_sim.mat
 /tutorials/vision/detectors/detector_pouch_sim.mat
+hw/hw09_actions_pick_and_place/yolo_export/detectors/detector_pouch_sim.mat
+hw/hw09_actions_pick_and_place/yolo_export/detectors/detector_gral_sim.mat
+hw/hw09_actions_pick_and_place/yolo_export/detectors/detector_can_sim.mat

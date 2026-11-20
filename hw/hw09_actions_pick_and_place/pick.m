@@ -18,7 +18,7 @@ function grip_result = pick(strategy,objectData,optns)
     % Check type of objectData. If matrix, assign directly; otherwise
     % extract.
     if isequal(size(objectData), [4, 4]) && isnumeric(objectData)
-        mat_R_T_M = objectData;
+            _M = objectData;
         label = "can";
     
     % Extract pose and label from object
