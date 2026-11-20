@@ -36,15 +36,17 @@ function [bboxes, scores, labels, numObjects, myImg, annotatedImage] = getLabele
     trainedYoloNet = pretrained.detector;
 
     %% TODO: Detect objects using yolo. Output bboxes, scores, labels. Threshold of 0.7
-    [bboxes,scores,labels] =    
+    [bboxes,scores,labels] = detect(trainedYoloNet, myImg, Threshold=0.7);
 
     %% TODO: Visualize the detected objects' bounding boxes by calling insertObjectAnnotation and save to annotatedImage
     disp("Drawing bounding boxes...")
-    annotatedImage = %complete code here%
+    annotatedImage = insertObjectAnnotation(myImg, "rectangle", bboxes, string(labels) + ": " + string(scores));
 
     % Display
     if optns{'debug'}
-        figure(1), imshow(annotatedImage);
+        figure(1);
+        imshow(annotatedImage);
+        figure(99); %this should stop it from getting over-written
     end
 
     %% Specify percentage of acceptable bounding box

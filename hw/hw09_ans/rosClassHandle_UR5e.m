@@ -98,9 +98,9 @@ classdef rosClassHandle_UR5e
 
             % Yolo Neural Network (careful with the path)
             % General
-            % disp('Loading YOLO Gral Sim Detector(s)... Please wait...');
-            % r.general_detector = load( fullfile(r.detector_path, 'detector_gral_sim.mat') );
-            % 
+            disp('Loading YOLO Gral Sim Detector(s)... Please wait...');
+            r.detector_path = "C:\Users\dculp\OneDrive\Documents\GitHub\26F_matlab_ros_support\hw\hw09_actions_pick_and_place\yolo_export\detectors";
+            r.general_detector = load( fullfile(r.detector_path, 'detector_gral_sim.mat') );
             % % Can
             % disp('Loading YOLO Can Sim Detector(s)... Please wait...');
             % r.can_detector     = load( fullfile(r.detector_path, 'detector_can_sim.mat') );
